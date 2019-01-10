@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  host: <%= ENV['APPLY_BACKEND_API_DATABASE_HOST'] || 'localhost' %>
+  username: <%= ENV['APPLY_BACKEND_API_DATABASE_USERNAME'] %>
+  password: <%= ENV['APPLY_BACKEND_API_DATABASE_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: apply_backend_api_development
+
+test: &test
+  <<: *default
+  database: apply_backend_api_test
+
+production:
+  <<: *default
+  database: <%= ENV['APPLY_BACKEND_API_DATABASE'] %>
